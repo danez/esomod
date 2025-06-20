@@ -1,10 +1,10 @@
 {
   "uuid": "49ed900f1b64c9394c3c99434161dcb9",
-  "path": "Offline/esotec_esp32_irrigation",
-  "name": "esotec_esp32_irrigation",
+  "path": "Offline/esoMOD",
+  "name": "esoMOD",
   "content": "",
   "created_at": "2025-05-28 17:51:31",
-  "updated_at": "2025-06-16 14:15:13",
+  "updated_at": "2025-06-20 21:30:25",
   "stick": "",
   "documents": [
     {
@@ -383,11 +383,11 @@
           }
         ]
       ],
-      "updateTime": 1750074243,
+      "updateTime": 1750446881,
       "createTime": 1748447492,
       "histories": [],
       "created_at": "2025-05-28 17:51:32",
-      "updated_at": "2025-06-16 13:44:03"
+      "updated_at": "2025-06-20 21:14:41"
     },
     {
       "uuid": "c37b6b950b6fb8ab7b0bd8b2f062d7af",
@@ -419,375 +419,16 @@
           "CustomPara"
         ],
         [
-          "10u",
-          3,
-          "C0805",
-          "C1,C5,C18",
+          "V_BAT",
+          4,
+          "TESTPOINT",
+          "3V3,BAT,MOTO,SOL",
           {
-            "Manufacturer Part": "CL21A106KAYNNNE",
-            "Manufacturer": "SAMSUNG(三星)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C15850"
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
           }
-        ],
-        [
-          "100n",
-          9,
-          "C0603",
-          "C2,C6,C8,C9,C10,C11,C13,C16,C17",
-          {
-            "Manufacturer Part": "CC0603KRX7R9BB104",
-            "Manufacturer": "YAGEO(国巨)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C14663"
-          }
-        ],
-        [
-          "22u",
-          2,
-          "C0805",
-          "C3,C4",
-          {
-            "Manufacturer Part": "CL21A226MAQNNNE",
-            "Manufacturer": "SAMSUNG(三星)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C45783"
-          }
-        ],
-        [
-          "1u",
-          1,
-          "C0603",
-          "C7",
-          {
-            "Manufacturer Part": "CL10A105KB8NNNC",
-            "Manufacturer": "SAMSUNG(三星)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C15849"
-          }
-        ],
-        [
-          "22p",
-          1,
-          "C0603",
-          "C15",
-          {
-            "Manufacturer Part": "CL10C220JB8NNNC",
-            "Manufacturer": "SAMSUNG(三星)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C1653"
-          }
-        ],
-        [
-          "SS34_C8678",
-          2,
-          "SMA_L4.3-W2.6-LS5.2-RD",
-          "D1,D2",
-          {
-            "Manufacturer Part": "SS34",
-            "Manufacturer": "MDD(辰达半导体)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C8678"
-          }
-        ],
-        [
-          "1N5819WS",
-          2,
-          "SOD-323_L1.8-W1.3-LS2.5-RD",
-          "D3,D4",
-          {
-            "Manufacturer Part": "1N5819WS",
-            "Manufacturer": "Hottech(合科泰)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C191023"
-          }
-        ],
-        [
-          "1N4148WS T4",
-          2,
-          "SOD-323_L1.8-W1.3-LS2.5-RD",
-          "D5,D6",
-          {
-            "Manufacturer Part": "1N4148WS",
-            "Manufacturer": "CJ(江苏长电/长晶)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C2128"
-          }
-        ],
-        [
-          "AO3401A",
-          2,
-          "SOT-23_L2.9-W1.3-P1.90-LS2.4-BR",
-          "Q1,Q3",
-          {
-            "Manufacturer Part": "AO3401A",
-            "Manufacturer": "AOS",
-            "Supplier": "LCSC",
-            "Supplier Part": "C15127"
-          }
-        ],
-        [
-          "SS8050",
-          1,
-          "SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR",
-          "Q2",
-          {
-            "Manufacturer Part": "SS8050(RANGE:200-350)",
-            "Manufacturer": "CJ(江苏长电/长晶)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C2150"
-          }
-        ],
-        [
-          "AO3400A",
-          1,
-          "SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR",
-          "Q4",
-          {
-            "Manufacturer Part": "AO3400A",
-            "Manufacturer": "AOS",
-            "Supplier": "LCSC",
-            "Supplier Part": "C20917"
-          }
-        ],
-        [
-          "51kΩ",
-          1,
-          "R0603",
-          "R1",
-          {
-            "Manufacturer Part": "0603WAF510JT5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C23197"
-          }
-        ],
-        [
-          "10kΩ",
-          8,
-          "R0603",
-          "R2,R4,R7,R9,R10,R12,R25,R27",
-          {
-            "Manufacturer Part": "0603WAF1002T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C25804"
-          }
-        ],
-        [
-          "180Ω",
-          1,
-          "R1206",
-          "R3",
-          {
-            "Manufacturer Part": "1206W4F1800T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C17924"
-          }
-        ],
-        [
-          "1kΩ",
-          8,
-          "R0603",
-          "R5,R6,R11,R13,R17,R21,R22,R30",
-          {
-            "Manufacturer Part": "0603WAF1001T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C21190"
-          }
-        ],
-        [
-          "33kΩ",
-          1,
-          "R0603",
-          "R8",
-          {
-            "Manufacturer Part": "0603WAF3302T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C4216"
-          }
-        ],
-        [
-          "22Ω",
-          2,
-          "R0603",
-          "R15,R16",
-          {
-            "Manufacturer Part": "0603WAF220JT5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C23345"
-          }
-        ],
-        [
-          "100kΩ",
-          2,
-          "R0603",
-          "R18,R29",
-          {
-            "Manufacturer Part": "0603WAF1003T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C25803"
-          }
-        ],
-        [
-          "5.1kΩ",
-          2,
-          "R0603",
-          "R19,R20",
-          {
-            "Manufacturer Part": "0603WAF5101T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C23186"
-          }
-        ],
-        [
-          "100Ω",
-          2,
-          "R0603",
-          "R23,R28",
-          {
-            "Manufacturer Part": "0603WAF1000T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C22775"
-          }
-        ],
-        [
-          "68kΩ",
-          1,
-          "R0603",
-          "R24",
-          {
-            "Manufacturer Part": "0603WAF6802T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C23231"
-          }
-        ],
-        [
-          "330Ω",
-          1,
-          "R0603",
-          "R31",
-          {
-            "Manufacturer Part": "0603WAF3300T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C23138"
-          }
-        ],
-        [
-          "4.7kΩ",
-          1,
-          "R0603",
-          "R32",
-          {
-            "Manufacturer Part": "0603WAF4701T5E",
-            "Manufacturer": "UNI-ROYAL(厚声)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C23162"
-          }
-        ],
-        [
-          "RESET",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW1",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
-          "BOOT",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW2",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
-          "AP63203WU-7",
-          1,
-          "TSOT-26_L2.9-W1.6-P0.95-LS2.8-BL",
-          "U1",
-          {
-            "Manufacturer Part": "AP63203WU-7",
-            "Manufacturer": "DIODES(美台)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C780769"
-          }
-        ],
-        [
-          "ESP32-C3-WROOM-02U-N4",
-          1,
-          "WIFI-SMD_L18.0-W14.3_ESP32-C3-WROOM-02U-N4",
-          "U2",
-          {
-            "Manufacturer Part": "ESP32-C3-WROOM-02U-N4",
-            "Manufacturer": "ESPRESSIF(乐鑫)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C2926676"
-          }
-        ],
-        [
-          "MCP6002T-I/SN",
-          1,
-          "SOIC-8_L4.9-W3.9-P1.27-LS6.0-BL",
-          "U4",
-          {
-            "Manufacturer Part": "MCP6002T-I/SN",
-            "Manufacturer": "MICROCHIP(美国微芯)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C7377"
-          }
-        ]
-      ],
-      "updateTime": 1749821314,
-      "createTime": 1748448227,
-      "histories": [],
-      "created_at": "2025-05-28 18:03:47",
-      "updated_at": "2025-06-13 15:28:34"
-    },
-    {
-      "uuid": "c6bdd776e76bb1b8313b1a5395accef6",
-      "title": "Motor",
-      "description": "",
-      "docType": "1",
-      "master": "",
-      "thumb": "/images/thumb-default.png",
-      "components": {
-        "e545f26e87c74952857381bd0bff848e": 1,
-        "95760f1b22ed43bd84e19d98eb83fc55": 1,
-        "bb009484ef804a24ac5d18c54b249586": 5,
-        "fd11c9e744c44aeab6011e8bd4c3ea86": 3,
-        "e64cc0b3af7c438589c7a8db8ae97782": 1,
-        "1fa8d89c0262e7e7b8f04c3b3b52fd36": 1,
-        "3ec77201bbcd4ecd8722658d581a4e60": 1,
-        "8698f55d2b05489c9b6d911e7a0aaab0": 2,
-        "0eedab92e7aafdde01ddc57928d2356c": 1,
-        "f80e29816fd30bb295222fb4f47bcc25": 1,
-        "0376fefd443c43d3b2b5352d39683098": 1
-      },
-      "BOM": [
-        [
-          "Value",
-          "Quantity",
-          "Package",
-          "Components",
-          "CustomPara"
         ],
         [
           "10u",
@@ -1126,17 +767,400 @@
           }
         ]
       ],
-      "updateTime": 1749832746,
+      "updateTime": 1750447825,
+      "createTime": 1748448227,
+      "histories": [],
+      "created_at": "2025-05-28 18:03:47",
+      "updated_at": "2025-06-20 21:30:25"
+    },
+    {
+      "uuid": "c6bdd776e76bb1b8313b1a5395accef6",
+      "title": "Motor",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "e545f26e87c74952857381bd0bff848e": 1,
+        "95760f1b22ed43bd84e19d98eb83fc55": 1,
+        "bb009484ef804a24ac5d18c54b249586": 5,
+        "fd11c9e744c44aeab6011e8bd4c3ea86": 3,
+        "e64cc0b3af7c438589c7a8db8ae97782": 1,
+        "1fa8d89c0262e7e7b8f04c3b3b52fd36": 1,
+        "3ec77201bbcd4ecd8722658d581a4e60": 1,
+        "8698f55d2b05489c9b6d911e7a0aaab0": 2,
+        "0eedab92e7aafdde01ddc57928d2356c": 1,
+        "f80e29816fd30bb295222fb4f47bcc25": 1,
+        "0376fefd443c43d3b2b5352d39683098": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "V_BAT",
+          4,
+          "TESTPOINT",
+          "3V3,BAT,MOTO,SOL",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "10u",
+          4,
+          "C0805",
+          "C1,C5,C15,C18",
+          {
+            "Manufacturer Part": "CL21A106KAYNNNE",
+            "Manufacturer": "SAMSUNG(三星)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C15850"
+          }
+        ],
+        [
+          "100n",
+          10,
+          "C0603",
+          "C2,C6,C8,C9,C10,C11,C12,C13,C16,C17",
+          {
+            "Manufacturer Part": "CC0603KRX7R9BB104",
+            "Manufacturer": "YAGEO(国巨)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C14663"
+          }
+        ],
+        [
+          "22u",
+          2,
+          "C0805",
+          "C3,C4",
+          {
+            "Manufacturer Part": "CL21A226MAQNNNE",
+            "Manufacturer": "SAMSUNG(三星)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C45783"
+          }
+        ],
+        [
+          "1u",
+          1,
+          "C0603",
+          "C7",
+          {
+            "Manufacturer Part": "CL10A105KB8NNNC",
+            "Manufacturer": "SAMSUNG(三星)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C15849"
+          }
+        ],
+        [
+          "SS34_C8678",
+          2,
+          "SMA_L4.3-W2.6-LS5.2-RD",
+          "D1,D2",
+          {
+            "Manufacturer Part": "SS34",
+            "Manufacturer": "MDD(辰达半导体)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C8678"
+          }
+        ],
+        [
+          "1N5819WS",
+          2,
+          "SOD-323_L1.8-W1.3-LS2.5-RD",
+          "D3,D4",
+          {
+            "Manufacturer Part": "1N5819WS",
+            "Manufacturer": "Hottech(合科泰)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C191023"
+          }
+        ],
+        [
+          "1N4148WS T4",
+          2,
+          "SOD-323_L1.8-W1.3-LS2.5-RD",
+          "D5,D6",
+          {
+            "Manufacturer Part": "1N4148WS",
+            "Manufacturer": "CJ(江苏长电/长晶)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C2128"
+          }
+        ],
+        [
+          "AO3401A",
+          2,
+          "SOT-23_L2.9-W1.3-P1.90-LS2.4-BR",
+          "Q1,Q3",
+          {
+            "Manufacturer Part": "AO3401A",
+            "Manufacturer": "AOS",
+            "Supplier": "LCSC",
+            "Supplier Part": "C15127"
+          }
+        ],
+        [
+          "SS8050",
+          1,
+          "SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR",
+          "Q2",
+          {
+            "Manufacturer Part": "SS8050(RANGE:200-350)",
+            "Manufacturer": "CJ(江苏长电/长晶)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C2150"
+          }
+        ],
+        [
+          "AO3400A",
+          1,
+          "SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR",
+          "Q4",
+          {
+            "Manufacturer Part": "AO3400A",
+            "Manufacturer": "AOS",
+            "Supplier": "LCSC",
+            "Supplier Part": "C20917"
+          }
+        ],
+        [
+          "51kΩ",
+          1,
+          "R0603",
+          "R1",
+          {
+            "Manufacturer Part": "0603WAF510JT5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C23197"
+          }
+        ],
+        [
+          "10kΩ",
+          8,
+          "R0603",
+          "R2,R4,R7,R9,R10,R12,R25,R27",
+          {
+            "Manufacturer Part": "0603WAF1002T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C25804"
+          }
+        ],
+        [
+          "180Ω",
+          1,
+          "R1206",
+          "R3",
+          {
+            "Manufacturer Part": "1206W4F1800T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C17924"
+          }
+        ],
+        [
+          "1kΩ",
+          8,
+          "R0603",
+          "R5,R6,R11,R13,R17,R21,R22,R30",
+          {
+            "Manufacturer Part": "0603WAF1001T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C21190"
+          }
+        ],
+        [
+          "33kΩ",
+          1,
+          "R0603",
+          "R8",
+          {
+            "Manufacturer Part": "0603WAF3302T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C4216"
+          }
+        ],
+        [
+          "10MΩ",
+          2,
+          "R0603",
+          "R14,R33",
+          {
+            "Manufacturer Part": "0603WAF1005T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C7250"
+          }
+        ],
+        [
+          "22Ω",
+          2,
+          "R0603",
+          "R15,R16",
+          {
+            "Manufacturer Part": "0603WAF220JT5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C23345"
+          }
+        ],
+        [
+          "100kΩ",
+          2,
+          "R0603",
+          "R18,R29",
+          {
+            "Manufacturer Part": "0603WAF1003T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C25803"
+          }
+        ],
+        [
+          "5.1kΩ",
+          2,
+          "R0603",
+          "R19,R20",
+          {
+            "Manufacturer Part": "0603WAF5101T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C23186"
+          }
+        ],
+        [
+          "100Ω",
+          2,
+          "R0603",
+          "R23,R28",
+          {
+            "Manufacturer Part": "0603WAF1000T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C22775"
+          }
+        ],
+        [
+          "68kΩ",
+          1,
+          "R0603",
+          "R24",
+          {
+            "Manufacturer Part": "0603WAF6802T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C23231"
+          }
+        ],
+        [
+          "330Ω",
+          1,
+          "R0603",
+          "R31",
+          {
+            "Manufacturer Part": "0603WAF3300T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C23138"
+          }
+        ],
+        [
+          "4.7kΩ",
+          1,
+          "R0603",
+          "R32",
+          {
+            "Manufacturer Part": "0603WAF4701T5E",
+            "Manufacturer": "UNI-ROYAL(厚声)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C23162"
+          }
+        ],
+        [
+          "RESET",
+          1,
+          "TS-1088-AR02016_ C720477",
+          "SW1",
+          {
+            "Manufacturer Part": "TS-1088-AR02016",
+            "Manufacturer": "XUNPU(讯普)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C720477"
+          }
+        ],
+        [
+          "BOOT",
+          1,
+          "TS-1088-AR02016_ C720477",
+          "SW2",
+          {
+            "Manufacturer Part": "TS-1088-AR02016",
+            "Manufacturer": "XUNPU(讯普)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C720477"
+          }
+        ],
+        [
+          "AP63203WU-7",
+          1,
+          "TSOT-26_L2.9-W1.6-P0.95-LS2.8-BL",
+          "U1",
+          {
+            "Manufacturer Part": "AP63203WU-7",
+            "Manufacturer": "DIODES(美台)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C780769"
+          }
+        ],
+        [
+          "ESP32-C3-WROOM-02U-N4",
+          1,
+          "WIFI-SMD_L18.0-W14.3_ESP32-C3-WROOM-02U-N4",
+          "U2",
+          {
+            "Manufacturer Part": "ESP32-C3-WROOM-02U-N4",
+            "Manufacturer": "ESPRESSIF(乐鑫)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C2926676"
+          }
+        ],
+        [
+          "MCP6002T-I/SN",
+          1,
+          "SOIC-8_L4.9-W3.9-P1.27-LS6.0-BL",
+          "U4",
+          {
+            "Manufacturer Part": "MCP6002T-I/SN",
+            "Manufacturer": "MICROCHIP(美国微芯)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C7377"
+          }
+        ]
+      ],
+      "updateTime": 1750446946,
       "createTime": 1748780695,
       "histories": [],
       "created_at": "2025-06-01 14:24:55",
-      "updated_at": "2025-06-13 18:39:06"
+      "updated_at": "2025-06-20 21:15:46"
     },
     {
       "uuid": "2f8cb001fb259cdcfe30210f3a77ddf1",
       "puuid": "49ed900f1b64c9394c3c99434161dcb9",
-      "title": "PCB_esotec_esp32_irrigation",
-      "filename": "PCB_esotec_esp32_irrigation.json",
+      "title": "PCB_esoMOD",
+      "filename": "PCB_esoMOD.json",
       "description": "",
       "docType": "3",
       "master": "",
@@ -1169,11 +1193,11 @@
         "f2352ab75fd5435780a5a73fac93999f": 1
       },
       "BOM": [],
-      "updateTime": 1750076113,
+      "updateTime": 1750446827,
       "createTime": 1748448448,
       "histories": [],
       "created_at": "2025-05-28 18:07:28",
-      "updated_at": "2025-06-16 14:15:13"
+      "updated_at": "2025-06-20 21:13:47"
     }
   ],
   "sort": [
@@ -1181,8 +1205,8 @@
     "c37b6b950b6fb8ab7b0bd8b2f062d7af",
     "c6bdd776e76bb1b8313b1a5395accef6"
   ],
-  "title": "esotec_esp32_irrigation",
-  "foldername": "pcb",
-  "schfilename": "esotec_esp32_irrigation.json",
-  "schfilemtime": 1750074243197
+  "title": "esoMOD",
+  "foldername": "esoMOD",
+  "schfilename": "esoMOD.json",
+  "schfilemtime": 1750447825958
 }
