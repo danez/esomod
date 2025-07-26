@@ -4,7 +4,7 @@
   "name": "esoMOD",
   "content": "",
   "created_at": "2025-05-28 17:51:31",
-  "updated_at": "2025-06-20 21:30:25",
+  "updated_at": "2025-07-26 19:54:39",
   "stick": "",
   "documents": [
     {
@@ -24,7 +24,7 @@
         "a1231657c3cd1ed286eeb513f352f9e2": 1,
         "0eedab92e7aafdde01ddc57928d2356c": 1,
         "6178fb58d28548759c8b659d2588bb6c": 1,
-        "4f44d34b99f446b0bd6e1ee365734f7c": 4
+        "4f44d34b99f446b0bd6e1ee365734f7c": 5
       },
       "BOM": [
         [
@@ -95,6 +95,18 @@
           }
         ],
         [
+          "0-50pF",
+          1,
+          "C0603",
+          "C19",
+          {
+            "Manufacturer Part": "CL10C220JB8NNNC",
+            "Manufacturer": "SAMSUNG(三星)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C1653"
+          }
+        ],
+        [
           "SS34_C8678",
           2,
           "SMA_L4.3-W2.6-LS5.2-RD",
@@ -128,6 +140,30 @@
             "Manufacturer": "CJ(江苏长电/长晶)",
             "Supplier": "LCSC",
             "Supplier Part": "C2128"
+          }
+        ],
+        [
+          "GND",
+          1,
+          "TESTPOINT",
+          "GND",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "UART",
+          1,
+          "PADS_2P_1MM",
+          "H1",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "LCSC",
+            "Supplier Part": "C49661"
           }
         ],
         [
@@ -172,10 +208,10 @@
           "R0603",
           "R1",
           {
-            "Manufacturer Part": "0603WAF510JT5E",
+            "Manufacturer Part": "0603WAF5102T5E",
             "Manufacturer": "UNI-ROYAL(厚声)",
             "Supplier": "LCSC",
-            "Supplier Part": "C23197"
+            "Supplier Part": "C23196"
           }
         ],
         [
@@ -323,30 +359,6 @@
           }
         ],
         [
-          "RESET",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW1",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
-          "BOOT",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW2",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
           "AP63203WU-7",
           1,
           "TSOT-26_L2.9-W1.6-P0.95-LS2.8-BL",
@@ -383,11 +395,11 @@
           }
         ]
       ],
-      "updateTime": 1750446881,
+      "updateTime": 1753552216,
       "createTime": 1748447492,
       "histories": [],
       "created_at": "2025-05-28 17:51:32",
-      "updated_at": "2025-06-20 21:14:41"
+      "updated_at": "2025-07-26 19:50:16"
     },
     {
       "uuid": "c37b6b950b6fb8ab7b0bd8b2f062d7af",
@@ -397,16 +409,14 @@
       "master": "",
       "thumb": "/images/thumb-default.png",
       "components": {
-        "fd11c9e744c44aeab6011e8bd4c3ea86": 10,
+        "fd11c9e744c44aeab6011e8bd4c3ea86": 11,
         "5b672aa5c19d4d828269cbe58bc480f9": 1,
         "bb009484ef804a24ac5d18c54b249586": 18,
-        "5c1036b53a4146e4841df4ed0a9de8f0": 2,
         "e9665e0c81fa469396b88822955bfc9e": 1,
-        "977135addacb46aebef69132f469146e": 1,
         "404aa9221ff94de597b8734806e7c74f": 1,
         "55d252945f124dd692f873e29dbe4f93": 1,
         "bbecd232d95b4071a1d2c77be04b28b0": 1,
-        "3ec77201bbcd4ecd8722658d581a4e60": 1,
+        "3ec77201bbcd4ecd8722658d581a4e60": 2,
         "1fa8d89c0262e7e7b8f04c3b3b52fd36": 1,
         "207283c67b3f48f4b2421c110e860fe9": 1
       },
@@ -479,6 +489,18 @@
           }
         ],
         [
+          "0-50pF",
+          1,
+          "C0603",
+          "C19",
+          {
+            "Manufacturer Part": "CL10C220JB8NNNC",
+            "Manufacturer": "SAMSUNG(三星)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C1653"
+          }
+        ],
+        [
           "SS34_C8678",
           2,
           "SMA_L4.3-W2.6-LS5.2-RD",
@@ -512,6 +534,30 @@
             "Manufacturer": "CJ(江苏长电/长晶)",
             "Supplier": "LCSC",
             "Supplier Part": "C2128"
+          }
+        ],
+        [
+          "GND",
+          1,
+          "TESTPOINT",
+          "GND",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "UART",
+          1,
+          "PADS_2P_1MM",
+          "H1",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "LCSC",
+            "Supplier Part": "C49661"
           }
         ],
         [
@@ -556,10 +602,10 @@
           "R0603",
           "R1",
           {
-            "Manufacturer Part": "0603WAF510JT5E",
+            "Manufacturer Part": "0603WAF5102T5E",
             "Manufacturer": "UNI-ROYAL(厚声)",
             "Supplier": "LCSC",
-            "Supplier Part": "C23197"
+            "Supplier Part": "C23196"
           }
         ],
         [
@@ -707,30 +753,6 @@
           }
         ],
         [
-          "RESET",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW1",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
-          "BOOT",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW2",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
           "AP63203WU-7",
           1,
           "TSOT-26_L2.9-W1.6-P0.95-LS2.8-BL",
@@ -767,11 +789,11 @@
           }
         ]
       ],
-      "updateTime": 1750447825,
+      "updateTime": 1753552215,
       "createTime": 1748448227,
       "histories": [],
       "created_at": "2025-05-28 18:03:47",
-      "updated_at": "2025-06-20 21:30:25"
+      "updated_at": "2025-07-26 19:50:15"
     },
     {
       "uuid": "c6bdd776e76bb1b8313b1a5395accef6",
@@ -862,6 +884,18 @@
           }
         ],
         [
+          "0-50pF",
+          1,
+          "C0603",
+          "C19",
+          {
+            "Manufacturer Part": "CL10C220JB8NNNC",
+            "Manufacturer": "SAMSUNG(三星)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C1653"
+          }
+        ],
+        [
           "SS34_C8678",
           2,
           "SMA_L4.3-W2.6-LS5.2-RD",
@@ -895,6 +929,30 @@
             "Manufacturer": "CJ(江苏长电/长晶)",
             "Supplier": "LCSC",
             "Supplier Part": "C2128"
+          }
+        ],
+        [
+          "GND",
+          1,
+          "TESTPOINT",
+          "GND",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "UART",
+          1,
+          "PADS_2P_1MM",
+          "H1",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "LCSC",
+            "Supplier Part": "C49661"
           }
         ],
         [
@@ -939,10 +997,10 @@
           "R0603",
           "R1",
           {
-            "Manufacturer Part": "0603WAF510JT5E",
+            "Manufacturer Part": "0603WAF5102T5E",
             "Manufacturer": "UNI-ROYAL(厚声)",
             "Supplier": "LCSC",
-            "Supplier Part": "C23197"
+            "Supplier Part": "C23196"
           }
         ],
         [
@@ -1090,30 +1148,6 @@
           }
         ],
         [
-          "RESET",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW1",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
-          "BOOT",
-          1,
-          "TS-1088-AR02016_ C720477",
-          "SW2",
-          {
-            "Manufacturer Part": "TS-1088-AR02016",
-            "Manufacturer": "XUNPU(讯普)",
-            "Supplier": "LCSC",
-            "Supplier Part": "C720477"
-          }
-        ],
-        [
           "AP63203WU-7",
           1,
           "TSOT-26_L2.9-W1.6-P0.95-LS2.8-BL",
@@ -1150,11 +1184,11 @@
           }
         ]
       ],
-      "updateTime": 1750446946,
+      "updateTime": 1753552215,
       "createTime": 1748780695,
       "histories": [],
       "created_at": "2025-06-01 14:24:55",
-      "updated_at": "2025-06-20 21:15:46"
+      "updated_at": "2025-07-26 19:50:15"
     },
     {
       "uuid": "2f8cb001fb259cdcfe30210f3a77ddf1",
@@ -1166,8 +1200,10 @@
       "master": "",
       "thumb": "/images/thumb-default.png",
       "components": {
-        "8b9bae2ee23045138b2c5aeed6af5026": 4,
-        "f8151fdc728a41ebbc304e11d39e5437": 14,
+        "f2352ab75fd5435780a5a73fac93999f": 1,
+        "8b9bae2ee23045138b2c5aeed6af5026": 5,
+        "12df0696498c420aa34d04810f8306ca": 1,
+        "f8151fdc728a41ebbc304e11d39e5437": 15,
         "398691f1f785460098bbe5ee6590333c": 29,
         "a593f67e671f4c709023d3a1733c5732": 1,
         "806a55eb4d3c40ab838f70f86785d85e": 1,
@@ -1176,9 +1212,7 @@
         "b7243d11a5f04fb7894887aaa3569585": 2,
         "dd3cfd4941c4479cb7f2c598e6fde06c": 4,
         "6924b36489de4921bb29ca14bf27c33f": 1,
-        "5c0be672313e4206a41dd5398a02f108": 1,
         "f8610078af0f4d8d85c24d7f02f16466": 5,
-        "0e5cc41934aa4e0b8696a93130cbc769": 2,
         "6d4ccf98d88248ecab1247f9e0c9ea9d": 1,
         "2ee8eb13a0124a108e622ce40c0c25a8": 3,
         "90d1b58a2d284d63b5d026a0c4e38bab": 1,
@@ -1189,15 +1223,14 @@
         "9d0695c477494295b207de586043a63d": 1,
         "aa197058609a4241b032ed61cdb98196": 1,
         "8c41cf656a4540a18e4cb976efb78a30": 1,
-        "e55683897aa748bd83cbac4d3883689e": 1,
-        "f2352ab75fd5435780a5a73fac93999f": 1
+        "e55683897aa748bd83cbac4d3883689e": 1
       },
       "BOM": [],
-      "updateTime": 1750446827,
+      "updateTime": 1753552479,
       "createTime": 1748448448,
       "histories": [],
       "created_at": "2025-05-28 18:07:28",
-      "updated_at": "2025-06-20 21:13:47"
+      "updated_at": "2025-07-26 19:54:39"
     }
   ],
   "sort": [
@@ -1208,5 +1241,5 @@
   "title": "esoMOD",
   "foldername": "esoMOD",
   "schfilename": "esoMOD.json",
-  "schfilemtime": 1750447825958
+  "schfilemtime": 1753552216138
 }
