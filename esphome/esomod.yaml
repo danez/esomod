@@ -1,0 +1,540 @@
+esphome:
+  name: esomod
+  comment: "ESPHome based esotec sprinkler controller"
+  on_boot:
+    then:
+      - lambda: |-
+          gpio_hold_dis(GPIO_NUM_5);  // Release hold on charging pin
+        # Do this early on to ensure we start/stop charging even when no network is available
+      - script.execute: check_charging_logic
+      - wait_until:
+          condition:
+            and:
+              - wifi.connected:
+              - api.connected:
+          timeout: 20s
+        # Now that we are connected, we can update the sensors
+      - text_sensor.template.publish:
+          id: sleep_mode
+          state: "awake"
+      - script.execute: update_water_sensor
+      - script.execute: update_simple_sensors
+      - lambda: |-
+          id(booting) = false;  // Set booting to false after all sensors are updated
+      - script.execute: update_status_led
+        # Add a delay to ensure the sensor updates are sent before we continue and set it again
+      - delay: 200ms
+      - script.execute: check_motor_request
+      - script.execute: consider_deep_sleep
+
+esp32:
+  variant: esp32c3
+  flash_size: 4MB
+  cpu_frequency: 160MHz
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: NONE
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret noise_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+deep_sleep:
+  id: deep_sleep_control
+  wakeup_pin:
+    number: GPIO0
+    allow_other_uses: true
+  wakeup_pin_mode: KEEP_AWAKE
+
+wifi:
+  fast_connect: true
+  output_power: 15
+  power_save_mode: HIGH
+  networks:
+    - ssid: !secret wifi_name
+      password: !secret wifi_password
+      bssid: !secret wifi_bssid
+
+one_wire:
+  - platform: gpio
+    pin:
+      number: GPIO8
+      ignore_strapping_warning: true
+
+globals:
+  - id: booting
+    type: bool
+    restore_value: false
+    initial_value: "true"
+
+# When we are staying awake, we still need to check the sensors
+interval:
+  - interval: 10s
+    then:
+      - script.execute: check_charging_logic
+      - script.execute: update_simple_sensors
+  - interval: 1s
+    then:
+      - script.execute: check_motor_request
+      - component.update: motor_current_adc
+      - script.execute: check_motor_overcurrent
+  - interval: 5min
+    then:
+      - script.execute: update_water_sensor
+  - interval: 5s
+    then:
+      - if:
+          condition:
+            switch.is_on: switch_motor
+          then:
+            - script.execute: update_water_sensor
+
+script:
+  - id: update_status_led
+    mode: restart
+    then:
+      - if:
+          condition:
+            switch.is_on: switch_motor
+          then:
+            - light.turn_on:
+                id: status_led
+                red: 0
+                green: 100%
+                blue: 0
+                brightness: 70%
+                effect: fast-pulse
+          else:
+            - if:
+                condition:
+                  lambda: |-
+                    // any error
+                    return id(status).state != "idle" && !id(booting);
+                then:
+                  - light.turn_on:
+                      id: status_led
+                      red: 100%
+                      green: 0
+                      blue: 0
+                      brightness: 70%
+                      effect: none
+                else:
+                  - if:
+                      condition:
+                        binary_sensor.is_on: charging
+                      then:
+                        - light.turn_on:
+                            id: status_led
+                            red: 100%
+                            green: 80%
+                            blue: 0
+                            brightness: 70%
+                            effect: none
+                      else:
+                        - light.turn_on:
+                            id: status_led
+                            red: 0
+                            green: 100%
+                            blue: 0
+                            brightness: 70%
+                            effect: none
+  - id: motor_timeout
+    mode: restart
+    then:
+      - delay: 8min
+      - logger.log: "Motor turned off due to 8 minute safety timeout"
+      - switch.turn_off: switch_motor
+  - id: check_motor_overcurrent
+    mode: single
+    then:
+      - if:
+          condition:
+            lambda: |-
+              return id(motor_current_adc).state >= 2.0;
+          then:
+            - logger.log: "Motor turned off due to overcurrent (>=2A)"
+            - switch.turn_off: switch_motor
+  - id: check_charging_logic
+    mode: restart
+    then:
+      - component.update: solar_adc
+      - component.update: battery_adc
+      - lambda: |-
+          float voltage = id(battery_adc).state;
+          float solar_voltage = id(solar_adc).state;
+
+          if (voltage < 7.90 && solar_voltage > (voltage + 0.35)) {
+            id(switch_chg).turn_on();
+            id(charging).publish_state(true);
+          } else if (voltage >= 8) {
+            id(switch_chg).turn_off();
+            id(charging).publish_state(false);
+          }
+      - script.execute: update_status_led
+  - id: update_water_sensor
+    mode: single
+    then:
+      - switch.turn_on: switch_water_sensor_power
+      - delay: 10ms
+      - lambda: |-
+          id(water_sensor_adc).update();
+      - switch.turn_off: switch_water_sensor_power
+      - lambda: |-
+          id(water_sensor).publish_state(id(water_sensor_adc).state > 1);
+      - component.update: status
+      - script.execute: update_status_led
+  - id: update_simple_sensors
+    mode: single
+    then:
+      - component.update: board_temp_sensor
+      - component.update: esp_temp_sensor
+      - component.update: solar_adc
+      - component.update: battery_adc
+      - component.update: battery_soc
+      - component.update: motor_current_adc
+      - component.update: wifi_signal_sensor
+      - component.update: status
+      - lambda: |-
+          // We check the charging logic before WiFi is connected
+          // that's why we need to republish the charging state
+          id(charging).publish_state(id(charging).state);
+      - script.execute: update_status_led
+  - id: check_motor_request
+    mode: single
+    then:
+      - if:
+          condition:
+            binary_sensor.is_on: motor_request
+          then:
+            - switch.turn_on: switch_motor
+            - homeassistant.service:
+                service: input_boolean.turn_off
+                data:
+                  entity_id: input_boolean.esomod_motor_request
+            - component.update: motor_current_adc
+  - id: consider_deep_sleep
+    mode: queued
+    then:
+      - if:
+          condition:
+            or:
+              - binary_sensor.is_on: prevent_deep_sleep
+              - binary_sensor.is_on: motor_request
+              - switch.is_on: switch_motor
+          then:
+            - deep_sleep.prevent: deep_sleep_control
+            - logger.log: "Skipping sleep"
+            - delay: 10s
+            - script.execute: consider_deep_sleep
+          else:
+            - lambda: |-
+                uint8_t sleep_time = id(normal_sleep_time).state;
+                std::string mode = "normal";
+
+                if (id(solar_adc).state == 0.0) {
+                  sleep_time = id(night_sleep_time).state;
+                  mode = "night";
+                } else if (id(battery_adc).state < 6.8) {
+                  sleep_time = id(battery_save_sleep_time).state;
+                  mode = "battery-save";
+                }
+
+                ESP_LOGI("main", "Entering %s sleep for %u minute(s)", mode.c_str(), sleep_time);
+                id(sleep_mode).publish_state(mode.c_str());
+                id(deep_sleep_control).set_sleep_duration(sleep_time * 60000);
+                gpio_hold_en(GPIO_NUM_5);   // Hold GPIO5 to ensure it keeps its state
+            # Give time to send data to Home Assistant
+            - delay: 500ms
+            # Turn LED off as late as possible, to ensure it does not get activated again
+            - light.turn_off: status_led
+            # Give the LED time to turn off
+            - delay: 50ms
+            - deep_sleep.enter: deep_sleep_control
+
+# Output pins
+output:
+  - platform: gpio
+    pin: GPIO5
+    id: out_chg
+    inverted: false
+
+  - platform: gpio
+    pin: GPIO6
+    id: out_motor
+    inverted: false
+
+  - platform: gpio
+    pin: GPIO7
+    id: output_water_sensor_power
+    inverted: false
+
+# WS2812B LED
+light:
+  - platform: esp32_rmt_led_strip
+    id: status_led
+    chipset: WS2812
+    internal: true
+    pin: GPIO10
+    num_leds: 1
+    default_transition_length: 0ms
+    rgb_order: GRB
+    name: "Status LED"
+    effects:
+      - pulse:
+          name: "fast-pulse"
+          transition_length: 0ms
+          update_interval: 500ms
+          min_brightness: 0%
+          max_brightness: 70%
+
+number:
+  - platform: template
+    name: "Normal Sleep Time"
+    id: normal_sleep_time
+    entity_category: config
+    min_value: 1
+    max_value: 5
+    step: 1
+    optimistic: true
+    unit_of_measurement: "min"
+    restore_value: true
+    initial_value: 1
+  - platform: template
+    name: "Battery-Save Sleep Time"
+    id: battery_save_sleep_time
+    entity_category: config
+    min_value: 1
+    max_value: 60
+    step: 1
+    optimistic: true
+    unit_of_measurement: "min"
+    restore_value: true
+    initial_value: 10
+  - platform: template
+    name: "Night Sleep Time"
+    id: night_sleep_time
+    entity_category: config
+    min_value: 1
+    max_value: 120
+    step: 1
+    optimistic: true
+    unit_of_measurement: "min"
+    restore_value: true
+    initial_value: 30
+
+switch:
+  - platform: output
+    internal: true
+    output: out_chg
+    id: switch_chg
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: output
+    name: "Motor Switch"
+    output: out_motor
+    id: switch_motor
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+      then:
+        - script.execute: motor_timeout
+        - if:
+            condition:
+              or:
+                - not:
+                    binary_sensor.is_on: water_sensor
+                - lambda: |-
+                    // Prevent motor if battery SOC is below 20%
+                    return id(battery_soc).state < 20;
+            then:
+              - switch.turn_off: switch_motor
+              - logger.log:
+                  "Motor prevented from turning on: No water or battery low"
+            else:
+              - binary_sensor.template.publish:
+                  id: motor_sensor
+                  state: true
+        - script.execute: update_status_led
+    on_turn_off:
+      then:
+        - binary_sensor.template.publish:
+            id: motor_sensor
+            state: false
+        - script.stop: motor_timeout
+        - script.execute: update_status_led
+  - platform: output
+    internal: true
+    output: output_water_sensor_power
+    id: switch_water_sensor_power
+    name: "Water Sensor Output"
+    restore_mode: ALWAYS_OFF
+
+sensor:
+  - platform: template
+    name: "Battery SoC"
+    id: battery_soc
+    device_class: battery
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: never
+    lambda: |-
+      // Linear mapping: 6.0V = 0%, 8.4V = 100%
+      constexpr float BATTERY_VOLTAGE_MIN = 6.0;
+      constexpr float BATTERY_VOLTAGE_MAX = 8.4;
+
+      float v = id(battery_adc).state;
+
+      // Clamp voltage range
+      if (v > BATTERY_VOLTAGE_MAX) v = BATTERY_VOLTAGE_MAX;
+      else if (v < BATTERY_VOLTAGE_MIN) v = BATTERY_VOLTAGE_MIN;
+
+      return (int)std::round(
+        (
+          (v - BATTERY_VOLTAGE_MIN) /
+          (BATTERY_VOLTAGE_MAX - BATTERY_VOLTAGE_MIN)
+        ) * 100.0
+      );
+    on_value:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_on: switch_motor
+                - lambda: "return x < 10;"
+            then:
+              - logger.log: "Motor turned off due to low battery SoC"
+              - switch.turn_off: switch_motor
+  - platform: internal_temperature
+    id: esp_temp_sensor
+    update_interval: never
+    name: "ESP Temperature"
+    entity_category: diagnostic
+    disabled_by_default: true
+  - platform: wifi_signal
+    id: wifi_signal_sensor
+    name: "WiFi Signal Strength"
+    update_interval: never
+    entity_category: diagnostic
+    disabled_by_default: true
+  - platform: dallas_temp
+    id: board_temp_sensor
+    name: Temperature
+    resolution: 10
+    accuracy_decimals: 2
+    update_interval: never
+  - platform: adc
+    pin: GPIO4
+    name: "Solar Voltage"
+    id: solar_adc
+    device_class: voltage
+    update_interval: never
+    samples: 10
+    attenuation: 12db
+    filters:
+      - multiply: 6.2
+      - lambda: |-
+          if (x < 0.5) return 0.0;
+          return x;
+  - platform: adc
+    pin:
+      number: GPIO2
+      ignore_strapping_warning: true
+    name: "Battery Voltage"
+    id: battery_adc
+    update_interval: never
+    device_class: voltage
+    samples: 10
+    attenuation: 12db
+    filters:
+      - multiply: 4.077
+      - lambda: |-
+          if (x < 0.5) return 0.0;
+          return x;
+  - platform: adc
+    pin: GPIO1
+    name: "Motor Current"
+    id: motor_current_adc
+    update_interval: never
+    device_class: current
+    samples: 10
+    attenuation: 12db
+    unit_of_measurement: "A"
+    accuracy_decimals: 2
+    filters:
+      - median:
+          window_size: 5
+          send_every: 1
+          send_first_at: 1
+      - lambda: |-
+          if (x < 0.1) return 0.0;  // Ignore low values
+          return x;
+      - lambda: |-
+          // Convert ADC voltage to current
+          // Gain = 7.8, R = 0.1 Ohm
+          return x / (0.1 * 7.8);
+  - platform: adc
+    pin: GPIO3
+    id: water_sensor_adc
+    internal: true
+    update_interval: never
+    attenuation: 12db
+
+binary_sensor:
+  - platform: template
+    name: "Water Presence"
+    id: water_sensor
+    device_class: moisture
+    on_release:
+      then:
+        - switch.turn_off: switch_motor
+  - platform: template
+    name: "Charging"
+    id: charging
+    device_class: battery_charging
+  - platform: template
+    name: "Motor"
+    device_class: moving
+    id: motor_sensor
+  - platform: gpio
+    pin:
+      number: GPIO0
+      allow_other_uses: true
+    name: "Button"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+  - platform: homeassistant
+    id: prevent_deep_sleep
+    entity_id: input_boolean.esomod_keep_awake
+  - platform: homeassistant
+    id: motor_request
+    entity_id: input_boolean.esomod_motor_request
+
+text_sensor:
+  - platform: template
+    name: "Sleep Mode"
+    id: sleep_mode
+    update_interval: never
+    entity_category: diagnostic
+  - platform: template
+    name: "Status"
+    id: status
+    update_interval: never
+    lambda: |-
+      if (id(switch_motor).state) {
+        return std::string("watering");
+      } else if (id(water_sensor).state == false && id(battery_soc).state < 20) {
+        return std::string("no-water-battery-low");
+      }  else if (id(water_sensor).state == false) {
+        return std::string("no-water");
+      } else if (id(battery_soc).state < 20) {
+        return std::string("battery-low");
+      } else {
+        return std::string("idle");
+      }

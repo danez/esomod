@@ -1,0 +1,59 @@
+alias: Sprinkler automation
+description: ""
+triggers:
+  - trigger: sun
+    event: sunrise
+    offset: "01:30:00"
+    id: sunrise
+  - trigger: sun
+    event: sunset
+    offset: 0
+    id: sunset
+conditions:
+  - condition: not
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.berlin_alexanderplatz_precipitation
+        above: 0
+  - condition: state
+    entity_id: binary_sensor.esomod_water_presence
+    state: "on"
+actions:
+  - action: input_boolean.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.esomod_motor_request
+  - wait_for_trigger:
+      - trigger: state
+        entity_id:
+          - binary_sensor.esomod_motor
+        from: null
+        to: "on"
+  - choose:
+      - conditions:
+          - condition: trigger
+            id:
+              - sunrise
+        sequence:
+          - delay:
+              hours: 0
+              minutes: 2
+              seconds: 0
+              milliseconds: 0
+      - conditions:
+          - condition: trigger
+            id:
+              - sunset
+        sequence:
+          - delay:
+              hours: 0
+              minutes: 1
+              seconds: 0
+              milliseconds: 0
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.esomod_motor_switch
+mode: single
