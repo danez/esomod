@@ -19,15 +19,20 @@ All the here mentioned products use the same control device, so the assumption i
 
 #### 2.1
 
-Reorder the resistors for the battery voltage divider to have cleaner traces
+Rotate the resistors for the battery voltage divider to have cleaner traces
 
 #### 2.0
 
-Clean up and optimize some traces and make ground plane bigger
+- Fix resistor value from 51Ohm to 51kOhm
+- Fix sensor to ESP connections it was reversed
+- Fix sensitivity of button by adding a capacitor, it was way to high
+- Remove reset button, as main switch can be used as reset
+- Remove boot button as not needed to flash
+- Change UART to be to small simple pads to save some space
 
 #### 1.1
 
-Fix Sensor routing which was wrong and add capacitor for button to reduce sensitivity
+Minor small fixes
 
 #### 1.0
 
