@@ -1,18 +1,6 @@
 For the esphome to work you need to create several helpers:
 
-
-### esomod_last_seen:
-
-Template:
-```
-{% if states.sensor.esomod_battery_voltage.last_updated > states.sensor.esomod_sleep_mode.last_updated %}
-{{ states.sensor.esomod_battery_voltage.last_updated }}
-{% else %}
-{{ states.sensor.esomod_sleep_mode.last_updated }}
-{% endif %}
-```
-
-DeviceClass: Timestamp
+`sensor.esomod_last_seen` is provided by ESPHome directly.
 
 ### esomod_last_watered:
 

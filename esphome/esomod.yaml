@@ -14,6 +14,12 @@ esphome:
               - wifi.connected:
               - api.connected:
           timeout: 20s
+      - wait_until:
+          condition:
+            lambda: |-
+              return id(homeassistant_time).now().is_valid();
+          timeout: 5s
+      - script.execute: update_last_seen
         # Now that we are connected, we can update the sensors
       - text_sensor.template.publish:
           id: sleep_mode
@@ -63,6 +69,10 @@ wifi:
   ssid: !secret wifi_name
   password: !secret wifi_password
 
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
 one_wire:
   - platform: gpio
     pin:
@@ -81,6 +91,7 @@ interval:
     then:
       - script.execute: check_charging_logic
       - script.execute: update_simple_sensors
+      - script.execute: update_last_seen
   - interval: 1s
     then:
       - script.execute: check_motor_request
@@ -98,6 +109,14 @@ interval:
             - script.execute: update_water_sensor
 
 script:
+  - id: update_last_seen
+    mode: restart
+    then:
+      - lambda: |-
+          auto now = id(homeassistant_time).now();
+          if (now.is_valid()) {
+            id(last_seen).publish_state(now.strftime("%Y-%m-%dT%H:%M:%S%z"));
+          }
   - id: update_status_led
     mode: restart
     then:
@@ -256,6 +275,7 @@ script:
                 id(deep_sleep_control).set_sleep_duration(sleep_time * 60000);
                 gpio_hold_en(GPIO_NUM_5);   // Hold GPIO5 to ensure it keeps its state
                 gpio_deep_sleep_hold_en();  // Keep held GPIOs latched during deep sleep
+            - script.execute: update_last_seen
             # Give time to send data to Home Assistant
             - delay: 500ms
             # Turn LED off as late as possible, to ensure it does not get activated again
@@ -522,6 +542,12 @@ binary_sensor:
     entity_id: input_boolean.esomod_motor_request
 
 text_sensor:
+  - platform: template
+    name: "Last Seen"
+    id: last_seen
+    device_class: timestamp
+    update_interval: never
+    entity_category: diagnostic
   - platform: template
     name: "Sleep Mode"
     id: sleep_mode
