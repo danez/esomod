@@ -4,6 +4,7 @@ esphome:
   on_boot:
     then:
       - lambda: |-
+          gpio_deep_sleep_hold_dis();  // Release deep-sleep hold on GPIOs
           gpio_hold_dis(GPIO_NUM_5);  // Release hold on charging pin
         # Do this early on to ensure we start/stop charging even when no network is available
       - script.execute: check_charging_logic
@@ -30,13 +31,13 @@ esphome:
 esp32:
   variant: esp32c3
   flash_size: 4MB
-  cpu_frequency: 160MHz
+  cpu_frequency: 80MHz
   framework:
     type: esp-idf
 
 # Enable logging
 logger:
-  level: NONE
+  level: debug
 
 # Enable Home Assistant API
 api:
@@ -57,11 +58,10 @@ deep_sleep:
 wifi:
   fast_connect: true
   output_power: 15
+  post_connect_roaming: false
   power_save_mode: HIGH
-  networks:
-    - ssid: !secret wifi_name
-      password: !secret wifi_password
-      bssid: !secret wifi_bssid
+  ssid: !secret wifi_name
+  password: !secret wifi_password
 
 one_wire:
   - platform: gpio
@@ -174,7 +174,7 @@ script:
           if (voltage < 7.90 && solar_voltage > (voltage + 0.35)) {
             id(switch_chg).turn_on();
             id(charging).publish_state(true);
-          } else if (voltage >= 8) {
+          } else if (voltage >= 8 || solar_voltage < voltage + 0.25) {
             id(switch_chg).turn_off();
             id(charging).publish_state(false);
           }
@@ -214,6 +214,10 @@ script:
           condition:
             binary_sensor.is_on: motor_request
           then:
+            - script.execute: update_water_sensor
+            - script.wait: update_water_sensor
+            - component.update: battery_adc
+            - component.update: battery_soc
             - switch.turn_on: switch_motor
             - homeassistant.service:
                 service: input_boolean.turn_off
@@ -251,6 +255,7 @@ script:
                 id(sleep_mode).publish_state(mode.c_str());
                 id(deep_sleep_control).set_sleep_duration(sleep_time * 60000);
                 gpio_hold_en(GPIO_NUM_5);   // Hold GPIO5 to ensure it keeps its state
+                gpio_deep_sleep_hold_en();  // Keep held GPIOs latched during deep sleep
             # Give time to send data to Home Assistant
             - delay: 500ms
             # Turn LED off as late as possible, to ensure it does not get activated again

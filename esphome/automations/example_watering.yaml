@@ -30,6 +30,9 @@ actions:
           - binary_sensor.esomod_motor
         from: null
         to: "on"
+    timeout:
+      minutes: "{{ states('number.esomod_night_sleep_time') | int(120) + 2 }}"
+    continue_on_timeout: false
   - choose:
       - conditions:
           - condition: trigger
